@@ -4,6 +4,22 @@
   </head>
   
   <body>
-  Coming soon!
+  Language is gendered if the context surrounding a mention is suggestive of a particular binary gender for that mention. 
+  Detecting the different ways in which it occurs is an important task since gendered language can bias NLP models 
+    (such as for coreference resolution). 
+  This task is challenging since genderedness is often expressed in subtle ways. 
+   Existing approaches need considerable annotation efforts for each language, domain, and author, 
+    and often require handcrafted lexicons and features. 
+    Additionally, these approaches do not provide a quantifiable measure of how gendered the text is, 
+    nor are they applicable at the fine-grained mention level.
+    In this paper, we provide a method that automatically provides gender labels for mentions in the text, 
+    which leverages syntactic and se- mantic constructions. 
+    We further train a supervised classifier on corpora labeled using this method to predict the gender 
+    of any mention from its context and evaluate it on unseen text. 
+    The model confidence for a prediction can be used as a proxy to indicate the level of genderedness of the context. 
+    We test this gendered language detector on movie summaries, movie reviews, news articles, and fiction novels, 
+    achieving an AUC of up to 0.71, and observe that the model predictions agree with the human predictions 
+    collected for this task. 
+    We also perform a qualitative analysis, providing examples of detected gendered sentences from the aforementioned domains.
   </body>
 </html>
