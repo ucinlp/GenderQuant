@@ -1,0 +1,1 @@
+ {|class="wikitable" |- !Actor !! Role |- |Don Murray || Sergeant Jack Leland |- |Karen Black || Officer Evelyn Carter |- |Pat Crowley || Gloria Leland |- |Howard Beckler || Police Captain |- |Eddie Egan || Captain Harrison |- |Herbert Jefferson Jr. || Saylor |- |Frank Sinatra Jr. || Carlo |- |James Whitmore Jr. || Jeff Allen |}

@@ -1,0 +1,1 @@
+ {| class"50%" |- bgcolor="#CCCCCC" ! Actor !! Role |- | Sivaji Ganesan || |- | B. Saroja Devi || |- | M. R. Radha || |- | M. N. Nambiar || |- | T. S. Balaiah || |- | S. V. Subbaiah || |- | M. V. Rajamma || |- | C. K. Saraswathi || |}

@@ -1,0 +1,1 @@
+ {| class"50%" |- bgcolor="#CCCCCC" ! Actor !! Role |- | M. G. Ramachandran || |- | Anjali Devi || |- | P. S. Veerappa || |- | S.Varalakshmi|| |- | N. S. Krishnan || |- | T. A. Madhuram || |- | K. A. Thangavelu || |- | T. P. Muthulakshmi || |- | Lakshmi Prabha || |- | E. R. Sahadevan || |}

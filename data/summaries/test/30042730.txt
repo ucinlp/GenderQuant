@@ -1,0 +1,1 @@
+ {| class"50%" |- bgcolor="#CCCCCC" ! Actor !! Role |- | Sivaji Ganesan || |- | S. S. Rajendran || |- | R. Muthuraman || |- | C. R. Vijayakumari || |- | Saradha || |- | S. V. Ranga Rao || |- | M. V. Rajamma || |- | Nagesh || |- | Manorama || |- | S. V. Sahasranamam || |- | O. A. K. Thevar || |- | R. Balasubramaniam || |}

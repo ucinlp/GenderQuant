@@ -1,0 +1,118 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>
+            GenderQuant
+        </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel = "stylesheet" type = "text/css" href = "slider.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div id="header" class="pt-4 pb-2">
+                <h2><span>GenderQuant</span></h2>
+                <p>
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 pb-3">
+                    <!-- <form> -->
+                    <div class="form-group">
+                        <label for="input-sentence">Sentence</label>
+                        <input type="text" class="form-control" id="input-sentence" type="text" aria-describedby="sentHelp" required value placeholder="Sentence goes here">
+                        <small id="sentHelp" class="form-text text-muted">Write a sentence that mentions a few people.</small>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="predict()">Run</button>
+                    <!-- </form> -->
+                </div>
+                <div class="col-lg-6 pb-3">
+                    <div id="output" class="output">
+                        <div class="card  text-center bg-light mt-4">
+                            <div class="card-body">
+                                    <p class="card-text">Run model to view results</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </body>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script> -->
+    <script>
+    function predict() {
+        var quotedFieldList = ['sentence'];
+        var data = {};
+        quotedFieldList.forEach(function(fieldName) {
+            data[fieldName] = document.getElementById("input-" + fieldName).value;
+        })
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/predict');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            if (xhr.status == 200) {
+                // If you want a more impressive visualization than just
+                // outputting the raw JSON, change this part of the code.
+                outputEl = document.getElementById("output")
+                outputEl.innerHTML = ""
+                // JSONpre = document.createElement("pre")
+                // JSONpre.innerHTML = JSON.stringify(JSON.parse(xhr.responseText), null, 2);
+                // outputEl.appendChild(JSONpre)
+                obj = JSON.parse(xhr.responseText)
+                outputs = obj['outputs']
+                quotedSent = obj['quotedSent']
+                preludeEl = document.createElement("div")
+                preludeEl.innerHTML = "Mentions identified using <a href=\"https://explosion.ai/demos/displacy-ent?text=" + quotedSent + "\">Spacy<\a>"
+                outputEl.appendChild(preludeEl)
+                console.log(outputs)
+                for (i=0; i<outputs.length; i+=1) {
+                    output = outputs[i]
+                    divEl = document.createElement("div")
+                    divEl.setAttribute("id", "outputDiv"+i)
+                    divEl.setAttribute("class", "card")
+                    divBodyEl = document.createElement("div")
+                    divBodyEl.setAttribute("class", "card-body")
+                    divEl.appendChild(divBodyEl)
+
+                    headerEl = document.createElement("h5")
+                    headerEl.setAttribute("class", "card-title")
+                    headerEl.innerText = outputs[i].metadata.token
+                    divBodyEl.appendChild(headerEl)
+
+                    descripEl = document.createElement("p")
+                    descripEl.innerHTML = "We will estimate the level of <b>" + outputs[i].true_label + "</b> genderedness in the language towards " + outputs[i].metadata.token + ". Low score indicates lower level of genderedness, while close to 100 indicates use of stereotypical language."
+                    divBodyEl.appendChild(descripEl)
+                    // canvasDivEl = document.createElement("div")
+                    // canvasDivEl.innerHTML = '<canvas id="canvas' + i + '"></canvas>'
+                    // divEl.appendChild(canvasDivEl)
+                    score = Math.round(outputs[i].score*100)
+                    slideContEl = document.createElement("div")
+                    slideContEl.setAttribute("class", "slidecontainer")
+
+                    valEl = document.createElement("span")
+                    valEl.setAttribute("class", "val")
+                    valEl.innerHTML = "Genderedness Score: <b>" + score + "</b>"
+                    slideContEl.appendChild(valEl)
+
+                    sliderEl = document.createElement("input")
+                    sliderEl.setAttribute("id", "slide"+i)
+                    genderClass = outputs[i].true_label+"Slider"
+                    sliderEl.setAttribute("class", "slider " + genderClass)
+                    sliderEl.setAttribute("type", "range")
+                    sliderEl.setAttribute("min", "0")
+                    sliderEl.setAttribute("max", "100")
+                    sliderEl.setAttribute("value", score)
+                    sliderEl.setAttribute("disabled", "true")
+
+                    slideContEl.appendChild(sliderEl)
+                    divBodyEl.appendChild(slideContEl)
+
+                    outputEl.appendChild(divEl)
+                }
+            }
+        };
+        xhr.send(JSON.stringify(data));
+    }
+    </script>
+</html>
